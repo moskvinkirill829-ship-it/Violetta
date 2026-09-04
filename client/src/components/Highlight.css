@@ -1,0 +1,34 @@
+.hl {
+  /* заливка «маркером» за текстом; корректно переносится по строкам */
+  background-image: linear-gradient(
+    var(--hl-color, var(--c-yellow)),
+    var(--hl-color, var(--c-yellow))
+  );
+  background-repeat: no-repeat;
+  background-position: 0 0.06em;
+  background-size: 100% 0;
+  padding: 0.04em 0.16em;
+  margin: 0 -0.06em;
+  border-radius: 0.55em 0.7em 0.5em 0.65em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-size 0.5s var(--ease) 0.15s;
+}
+
+/* по умолчанию (вне Reveal) — сразу залито */
+.hl {
+  background-size: 100% calc(100% - 0.1em);
+}
+
+.hl__text {
+  position: relative;
+}
+
+/* внутри Reveal — «прорисовка» при появлении */
+.reveal .hl {
+  background-size: 100% 0;
+}
+
+.reveal--in .hl {
+  background-size: 100% calc(100% - 0.1em);
+}

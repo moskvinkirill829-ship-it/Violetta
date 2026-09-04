@@ -1,0 +1,24 @@
+node_modules/
+dist/
+build/
+*.log
+npm-debug.log*
+
+# env / secrets
+.env
+.env.local
+server/.env
+
+# runtime data (заявки, подписчики бота)
+server/data/*.csv
+server/data/*.json
+!server/data/.gitkeep
+
+# editor / os
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# claude code — локальные настройки конкретной машины
+.claude/settings.local.json

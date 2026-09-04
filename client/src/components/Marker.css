@@ -1,0 +1,41 @@
+.marker {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.marker__text {
+  position: relative;
+  z-index: 1;
+}
+
+.marker__stroke {
+  position: absolute;
+  left: -0.1em;
+  right: -0.1em;
+  width: calc(100% + 0.2em);
+  height: 0.42em;
+  bottom: -0.12em;
+  z-index: 0;
+  overflow: visible;
+}
+
+.marker--wave .marker__stroke {
+  height: 0.5em;
+  bottom: -0.22em;
+}
+
+/* появление штриха «дорисовыванием» */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal .marker__stroke path {
+    stroke-dasharray: 640;
+    stroke-dashoffset: 640;
+  }
+  .reveal--in .marker__stroke path {
+    transition: stroke-dashoffset 0.9s var(--ease) 0.25s;
+    stroke-dashoffset: 0;
+  }
+  .reveal--in .marker--brush .marker__stroke path {
+    stroke-dashoffset: 0;
+  }
+}

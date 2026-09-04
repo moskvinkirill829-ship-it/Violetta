@@ -1,0 +1,112 @@
+.tch__head {
+  text-align: center;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+
+.tch__title {
+  margin-bottom: 12px;
+}
+
+.tch__cats-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-primary);
+}
+
+.tch__cats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.6vw, 28px);
+  margin-bottom: clamp(36px, 5vw, 60px);
+}
+
+.tch__cat {
+  background: var(--c-surface-lav);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+}
+
+.tch__cat-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.tch__cat-text {
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+.tch__cat-exp {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--c-primary-2);
+  background: var(--c-surface);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* --- Карточка преподавателя --- */
+.tch-card {
+  width: clamp(230px, 40vw, 268px);
+  background: var(--c-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tch-card__photo {
+  aspect-ratio: 3 / 3.4;
+  background: var(--c-surface-lav);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.tch-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tch-card__ph {
+  font-size: 3rem;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--c-primary) 40%, #fff);
+}
+
+.tch-card__body {
+  padding: 16px 18px 20px;
+}
+
+/* docx: подписи преподавателей — 13–14px, 400, #68639A */
+.tch-card__name {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--c-primary);
+  margin-bottom: 3px;
+}
+
+.tch-card__subject {
+  font-size: var(--fs-body);
+  font-weight: 400;
+  color: var(--c-text);
+}
+
+.tch-card__exp {
+  font-size: var(--fs-body);
+  font-weight: 400;
+  color: var(--c-text);
+  margin-top: 1px;
+}
+
+@media (max-width: 760px) {
+  .tch__cats {
+    grid-template-columns: 1fr;
+  }
+}

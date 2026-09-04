@@ -1,0 +1,98 @@
+.carousel {
+  position: relative;
+  padding-inline: clamp(0px, 3vw, 56px); /* место под боковые стрелки */
+}
+
+.carousel__viewport {
+  overflow: hidden;
+  padding: 8px 4px 12px;
+  margin: -8px -4px -12px;
+}
+
+.carousel__track {
+  display: flex;
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: stretch;
+}
+
+.carousel__track > * {
+  flex: 0 0 auto;
+}
+
+/* --- Боковые стрелки --- */
+.carousel__arrow {
+  position: absolute;
+  top: calc(50% - 20px);
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-primary);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), background-color 0.15s var(--ease);
+}
+
+.carousel__arrow:hover {
+  background: var(--c-primary-2);
+  color: #fff;
+  border-color: var(--c-primary-2);
+  transform: scale(1.06);
+}
+
+.carousel__arrow--prev {
+  left: 0;
+}
+
+.carousel__arrow--next {
+  right: 0;
+}
+
+/* --- Точки --- */
+.carousel__dots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 340px;
+  margin: clamp(20px, 3vw, 30px) auto 0;
+}
+
+.carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: var(--c-border);
+  cursor: pointer;
+  transition: width 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+
+.carousel__dot.is-active {
+  width: 22px;
+  border-radius: 999px;
+  background: var(--c-primary-2);
+}
+
+@media (max-width: 640px) {
+  .carousel {
+    padding-inline: 0;
+  }
+  .carousel__arrow {
+    width: 40px;
+    height: 40px;
+    background: color-mix(in srgb, var(--c-surface) 90%, transparent);
+    backdrop-filter: blur(4px);
+  }
+  .carousel__arrow--prev {
+    left: 2px;
+  }
+  .carousel__arrow--next {
+    right: 2px;
+  }
+}
