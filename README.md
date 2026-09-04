@@ -21,8 +21,10 @@
 
 ```bash
 npm install          # ставит зависимости всех воркспейсов
-cp server/.env.example server/.env   # (Windows: copy server\.env.example server\.env)
 ```
+
+`server/.env` уже в репозитории (токен бота + код подписки). Для своего бота —
+поменяйте значения в нём.
 
 ## Разработка
 

@@ -10,8 +10,8 @@
 Больше ничего не нужно: базы данных нет, заявки идут в Telegram + CSV.
 
 > Проще без консоли — **[Amvera Cloud](https://amvera.ru/)** (git push → деплой, ~300 ₽/мес):
-> создать проект, тип **Node.js**, команда запуска `npm start`, порт `3001`,
-> переменные `TELEGRAM_BOT_TOKEN` и `TELEGRAM_SUBSCRIBE_CODE` — в настройках проекта.
+> создать проект, тип **Node.js**, команда запуска `npm start`, порт `3001`.
+> Токен бота и код подписки берутся из `server/.env` в репозитории.
 > Дальше этот раздел можно не читать.
 
 ---
@@ -50,24 +50,13 @@ DOMAIN=ваш-домен.ru bash setup.sh
 ```
 Скрипт поставит Node 20, nginx, HTTPS-сертификат, systemd-сервис.
 
-### 4. Вписать токен бота
-```bash
-nano /opt/pomogarium/app/server/.env
-```
-```
-NODE_ENV=production
-TELEGRAM_BOT_TOKEN=<токен от @BotFather>
-TELEGRAM_SUBSCRIBE_CODE=<код-пароль для подписки>
-CORS_ORIGIN=https://ваш-домен.ru
-```
-(токен и код — те, что вам передали отдельно, не через git)
-```bash
-systemctl restart pomogarium
-```
+### 4. (по желанию) поменять токен/код
+Токен бота и код подписки уже лежат в `server/.env` в репозитории.
+Сменить — `nano /opt/pomogarium/app/server/.env`, затем `systemctl restart pomogarium`.
 
 ### 5. Проверка
 - Откройте `https://ваш-домен.ru` — сайт работает.
-- В Telegram отправьте боту `/start ВАШ_КОД` — придёт «✅ Готово».
+- В Telegram отправьте боту `/start Violletta2670` — придёт «✅ Готово».
 - Заполните форму на сайте — заявка придёт в Telegram.
 
 ---

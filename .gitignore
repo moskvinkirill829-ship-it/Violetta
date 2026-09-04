@@ -8,6 +8,7 @@ npm-debug.log*
 .env
 .env.local
 server/.env
+!server/.env
 
 # runtime data (заявки, подписчики бота)
 server/data/*.csv

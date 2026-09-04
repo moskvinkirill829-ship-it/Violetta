@@ -33,9 +33,11 @@ echo "==> Сборка"
 sudo -u "$APP_USER" bash -c "cd $APP_DIR && npm ci && npm run build"
 
 if [[ ! -f "$APP_DIR/server/.env" ]]; then
-  echo "==> server/.env не найден — создаю из шаблона (ЗАПОЛНИТЕ ТОКЕН на шаге 4!)"
   sudo -u "$APP_USER" cp "$APP_DIR/server/.env.example" "$APP_DIR/server/.env"
-  sudo -u "$APP_USER" bash -c "printf '\nNODE_ENV=production\nCORS_ORIGIN=https://$DOMAIN\n' >> $APP_DIR/server/.env"
+fi
+# домен для CORS
+if ! grep -q '^CORS_ORIGIN=' "$APP_DIR/server/.env"; then
+  sudo -u "$APP_USER" bash -c "printf '\nCORS_ORIGIN=https://$DOMAIN\n' >> $APP_DIR/server/.env"
 fi
 
 echo "==> systemd-сервис"
@@ -86,10 +88,10 @@ echo
 echo "============================================================"
 echo " Готово. Сайт: https://$DOMAIN"
 echo
-echo " ВАЖНО: впишите токен бота в $APP_DIR/server/.env:"
-echo "   TELEGRAM_BOT_TOKEN=<токен от @BotFather>"
-echo "   TELEGRAM_SUBSCRIBE_CODE=<код-пароль для подписки>"
-echo " затем:  systemctl restart pomogarium"
+echo " Токен бота уже в $APP_DIR/server/.env. Проверьте/поменяйте при необходимости:"
+echo "   TELEGRAM_BOT_TOKEN=8986860813:AAGIWCXGpGGyujlD1oqOp50KAJ4vCr1d6-k"
+echo "   TELEGRAM_SUBSCRIBE_CODE=Violletta2670"
+echo " после правок:  systemctl restart pomogarium"
 echo
 echo " Логи:      journalctl -u pomogarium -f"
 echo " Статус:    systemctl status pomogarium"
