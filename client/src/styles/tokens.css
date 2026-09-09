@@ -36,8 +36,8 @@
   --chip-peach: #e8dcf6;
   --chip-lilac: #e0d3f4;
 
-  /* --- Форма заявки: приглушённый фиолетовый (не агрессивный) --- */
-  --form-gradient: linear-gradient(140deg, #332a63 0%, #493c88 100%);
+  /* --- Форма заявки: нежно-фиолетовый, как плашки предметов --- */
+  --form-gradient: linear-gradient(140deg, #e4dbf7 0%, #d6c9f2 100%);
   --form-field-bg: #ffffff;
 
   /* --- Типографика --- */

@@ -8,10 +8,9 @@ export const contacts = {
   brandTagline: 'подбор репетиторов', // подпись под логотипом
   phone: '+7 963 349-77-27',
   phoneHref: 'tel:+79633497727',
-  // TODO: заменить на реальные ссылки
-  telegram: 'https://t.me/username',
-  whatsapp: 'https://wa.me/79633497727',
-  max: 'https://max.ru/username',
+  telegram: 'https://t.me/violet_repetitor',
+  whatsapp: 'https://wa.me/message/SG726GU3IEQ5L1',
+  max: 'https://max.ru/u/f9LHodD0cOKOMeuCd-Msv0ZyTbtpvFYibT4M_SO-MKySwz3eK5l3JMPOuiY',
   email: 'hello@pomogarium.ru', // TODO
 }
 

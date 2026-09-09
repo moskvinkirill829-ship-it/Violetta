@@ -8,9 +8,10 @@
 }
 
 .tch__cats-label {
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.5rem);
+  font-weight: 800;
   color: var(--c-primary);
+  margin-top: 6px;
 }
 
 .tch__cats {
