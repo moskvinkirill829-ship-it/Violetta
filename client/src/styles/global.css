@@ -26,6 +26,7 @@ body {
   background: var(--c-bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip; /* декоративные круги не дают горизонтальный скролл */
 }
 
 img,

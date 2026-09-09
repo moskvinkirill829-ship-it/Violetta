@@ -1,5 +1,5 @@
 .hero {
-  padding-block: 10px; /* почти вплотную к хедеру сверху и к полосе снизу */
+  padding-block: 10px 4px; /* почти вплотную к хедеру сверху и к полосе снизу */
   overflow: hidden;
 }
 
@@ -36,6 +36,7 @@
 .hero__media {
   position: relative;
   isolation: isolate;
+  min-width: 0;
 }
 
 .hero__photo {
@@ -63,7 +64,7 @@
   aspect-ratio: 1;
   background: color-mix(in srgb, var(--c-surface-lav) 82%, #fff);
   top: -12%;
-  left: -14%;
+  left: -12%;
 }
 
 .hero__blob--2 {
@@ -71,7 +72,7 @@
   aspect-ratio: 1;
   background: color-mix(in srgb, var(--chip-blue) 78%, #fff);
   bottom: -16%;
-  right: -12%;
+  right: -10%;
 }
 
 .hero__dot {
@@ -100,7 +101,7 @@
     padding-block: 16px;
   }
   .hero__inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     text-align: center;
   }
   .hero__lead {

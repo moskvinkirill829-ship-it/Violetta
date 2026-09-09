@@ -1,34 +1,34 @@
 .hl {
-  /* заливка «маркером» за текстом; корректно переносится по строкам */
-  background-image: linear-gradient(
-    var(--hl-color, var(--c-yellow)),
-    var(--hl-color, var(--c-yellow))
-  );
-  background-repeat: no-repeat;
-  background-position: left 0.16em;
-  background-size: 100% 0;
-  padding: 0 0.12em;
-  margin: 0;
-  border-radius: 0.42em 0.5em 0.42em 0.5em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-  transition: background-size 0.5s var(--ease) 0.15s;
-}
-
-/* полоса тоньше строки — как в макете, не жирная */
-.hl {
-  background-size: 100% 0.82em;
+  position: relative;
+  display: inline;
+  isolation: isolate;
 }
 
 .hl__text {
   position: relative;
+  z-index: 1;
 }
 
-/* внутри Reveal — «прорисовка» при появлении */
-.reveal .hl {
-  background-size: 100% 0;
+/* жёлтая заливка ровно по границам текста — без большого выступа */
+.hl::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  left: -0.04em;
+  right: -0.04em;
+  top: 0.08em;
+  bottom: 0.08em;
+  background: var(--hl-color, var(--c-yellow));
+  border-radius: 0.28em;
 }
 
-.reveal--in .hl {
-  background-size: 100% 0.82em;
+@media (prefers-reduced-motion: no-preference) {
+  .reveal .hl::before {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  .reveal--in .hl::before {
+    transition: transform 0.45s var(--ease) 0.2s;
+    transform: scaleX(1);
+  }
 }
