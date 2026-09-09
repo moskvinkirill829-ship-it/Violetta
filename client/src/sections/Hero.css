@@ -48,7 +48,6 @@
   aspect-ratio: 4 / 3;
   min-height: 460px;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
   object-fit: cover;
 }
 
