@@ -56,7 +56,7 @@
   /* --- Раскладка --- */
   --container: 1320px;
   --gutter: clamp(14px, 2.2vw, 24px);
-  --section-y: clamp(44px, 5.5vw, 78px);
+  --section-y: clamp(36px, 4.4vw, 60px);
   --radius-sm: 12px;
   --radius: 20px;
   --radius-lg: 28px;

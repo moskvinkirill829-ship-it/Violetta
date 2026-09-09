@@ -1,7 +1,9 @@
-.how {
+.how.section {
   background: linear-gradient(180deg, var(--c-surface-lav), color-mix(in srgb, var(--c-surface-lav) 30%, var(--c-bg)));
   border-radius: var(--radius-lg);
   margin-inline: var(--gutter);
+  /* следует сразу за компактной полосой преимуществ — верхний отступ меньше */
+  padding-block: clamp(28px, 3.4vw, 46px) clamp(36px, 4.4vw, 60px);
 }
 
 .how__inner {
