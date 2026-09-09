@@ -9,17 +9,17 @@
   z-index: 1;
 }
 
-/* жёлтая заливка ровно по границам текста — без большого выступа */
+/* жёлтая заливка вплотную по контуру слова — пара пикселей вокруг букв */
 .hl::before {
   content: '';
   position: absolute;
   z-index: 0;
-  left: -0.04em;
-  right: -0.04em;
-  top: 0.08em;
-  bottom: 0.08em;
+  left: -0.03em;
+  right: -0.03em;
+  top: 0.13em;
+  bottom: 0.15em;
   background: var(--hl-color, var(--c-yellow));
-  border-radius: 0.28em;
+  border-radius: 0.2em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
