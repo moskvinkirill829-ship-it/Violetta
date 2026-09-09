@@ -1,78 +1,89 @@
-# Хостинг «Помогариум» — быстрый старт
+# Хостинг «Помогариум» на Reg.ru
 
-## Что купить
-
-| | Где | Цена | Зачем |
-|---|---|---|---|
-| **VPS** | [Timeweb Cloud](https://timeweb.cloud/) / [Selectel](https://selectel.ru/) / [Reg.ru Cloud](https://www.reg.ru/vps/) | ~250–450 ₽/мес | самый маленький тариф: 1 vCPU, 1 ГБ RAM, Ubuntu 22.04 |
-| **Домен** | там же или [reg.ru](https://www.reg.ru/) | ~200 ₽/год (`.ru`) | адрес сайта |
-
-Больше ничего не нужно: базы данных нет, заявки идут в Telegram + CSV.
-
-> Проще без консоли — **[Amvera Cloud](https://amvera.ru/)** (git push → деплой, ~300 ₽/мес):
-> создать проект, тип **Node.js**, команда запуска `npm start`, порт `3001`.
-> Токен бота и код подписки берутся из `server/.env` в репозитории.
-> Дальше этот раздел можно не читать.
+Приложение — **один Node-процесс** (Express раздаёт сайт + API + держит Telegram-бота).
+Нужен обычный VPS с Linux. Serverless (Vercel/Netlify) **не подходит** — бот требует
+постоянно живущий процесс.
 
 ---
 
-## Установка на VPS (10–15 минут)
+## 1. Заказать VPS на Reg.ru
 
-### 1. Домен → сервер
-В панели регистратора домена создайте **A-записи**:
+[reg.ru → Облачные серверы (VPS)](https://www.reg.ru/vps/cloud) →
+самый младший тариф хватает:
+
+- **ОС: Ubuntu 22.04** (важно — не CentOS, не панель ISPmanager)
+- 1 vCPU, 1 ГБ RAM, 10 ГБ диск
+- ~250–400 ₽/мес
+
+После оплаты в панели / на почте будут **IP-адрес** и **root-пароль**.
+
+## 2. (можно позже) Домен
+
+Если домен на Reg.ru: в карточке домена → **DNS-серверы / Управление зоной** →
+добавить **A-записи**:
 ```
 @     →  IP вашего VPS
 www   →  IP вашего VPS
 ```
-Подождите 10–30 минут, пока обновится DNS.
+DNS обновляется 10–60 минут. Без домена сайт откроется просто по `http://IP`.
 
-### 2. Залить код на сервер
-Подключитесь по SSH (`ssh root@IP`) и выберите способ:
+## 3. Подключиться и развернуть
 
-**а) через GitHub** (удобно обновлять):
+С Windows — через **PowerShell** или [PuTTY](https://www.putty.org/):
 ```bash
-mkdir -p /opt/pomogarium
-git clone https://github.com/ВАШ_АККАУНТ/ВАШ_РЕПО.git /opt/pomogarium/app
+ssh root@IP_СЕРВЕРА          # ввести root-пароль
+
+git clone https://github.com/moskvinkirill829-ship-it/Violetta.git /opt/pomogarium/app
+cd /opt/pomogarium/app
+
+# без домена:
+bash deploy/setup.sh
+# с доменом (когда A-записи уже прописаны):
+DOMAIN=ваш-домен.ru bash deploy/setup.sh
 ```
 
-**б) архивом** (без GitHub): на своём компьютере запакуйте папку проекта
-(без `node_modules`, `dist`, `server/.env`) в zip, загрузите на сервер
-(`scp project.zip root@IP:/root/`) и распакуйте:
+Скрипт сам поставит Node 20, nginx, соберёт проект, настроит автозапуск (systemd),
+а с доменом — ещё и бесплатный HTTPS-сертификат. Токен бота уже в `server/.env`
+в репозитории, вписывать ничего не надо.
+
+## 4. Проверка
+
 ```bash
-mkdir -p /opt/pomogarium/app
-unzip /root/project.zip -d /opt/pomogarium/app
+curl http://localhost:3001/api/health          # -> {"ok":true}
 ```
-
-### 3. Запустить установку
-```bash
-cd /opt/pomogarium/app/deploy
-DOMAIN=ваш-домен.ru bash setup.sh
-```
-Скрипт поставит Node 20, nginx, HTTPS-сертификат, systemd-сервис.
-
-### 4. (по желанию) поменять токен/код
-Токен бота и код подписки уже лежат в `server/.env` в репозитории.
-Сменить — `nano /opt/pomogarium/app/server/.env`, затем `systemctl restart pomogarium`.
-
-### 5. Проверка
-- Откройте `https://ваш-домен.ru` — сайт работает.
-- В Telegram отправьте боту `/start Violletta2670` — придёт «✅ Готово».
-- Заполните форму на сайте — заявка придёт в Telegram.
+- Открыть `http://IP` (или `https://домен`) — сайт работает.
+- В Telegram боту **@Violetta\_Zayavki\_bot** отправить `/start Violletta2670` → «✅ Готово».
+- Заполнить форму на сайте → заявка придёт в Telegram.
 
 ---
 
-## Обновление после правок в коде
+## Обновление после изменений в коде
+
 ```bash
-cd /opt/pomogarium/app/deploy && bash update.sh
+cd /opt/pomogarium/app && bash deploy/update.sh
 ```
 
-## Полезное
+## Полезные команды
+
 ```bash
-journalctl -u pomogarium -f          # логи в реальном времени
-systemctl status pomogarium          # статус
-systemctl restart pomogarium         # перезапуск
-cat /opt/pomogarium/app/server/data/leads.csv   # резервная копия заявок
+journalctl -u pomogarium -f        # логи в реальном времени
+systemctl status pomogarium        # статус
+systemctl restart pomogarium       # перезапуск
+cat /opt/pomogarium/app/server/data/leads.csv        # резервная копия заявок
+cat /opt/pomogarium/app/server/data/subscribers.json # кто подписан на заявки
 ```
 
-> ⚠️ Запускать нужно **один** экземпляр сервера — Telegram-бот работает через
-> long-polling, два процесса с одним токеном дадут ошибку `409 Conflict`.
+## Сменить токен / код подписки
+
+```bash
+nano /opt/pomogarium/app/server/.env
+systemctl restart pomogarium
+```
+
+---
+
+> ⚠️ Запускать **один** экземпляр сервера. Telegram-бот работает через long-polling —
+> два процесса с одним токеном дадут ошибку `409 Conflict` (и заявки перестанут ходить).
+>
+> ⚠️ Не берите на Reg.ru «Виртуальный хостинг» с панелью — там Node-приложения
+> запускаются через Passenger, фоновый цикл бота может убиваться. Нужен именно **VPS**.
