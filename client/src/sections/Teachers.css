@@ -16,48 +16,50 @@
 .tch__cats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(16px, 2.4vw, 26px);
-  margin-bottom: clamp(36px, 5vw, 60px);
+  gap: clamp(18px, 2.6vw, 30px);
+  max-width: 940px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
 }
 
-/* вертикальные колонки, выше чем шире */
+/* карточки категорий — в том же вертикальном формате, что и карточки преподов */
 .tch__cat {
   display: flex;
   flex-direction: column;
-  min-height: 268px;
-  background: var(--c-surface-lav);
+  min-height: 360px;
+  background: var(--c-surface);
   border: 1.5px solid var(--c-border);
   border-radius: var(--radius);
-  padding: 28px 24px;
+  box-shadow: var(--shadow-card);
+  padding: 30px 26px;
 }
 
 .tch__cat-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .tch__cat-text {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--c-text);
-  line-height: 1.5;
-  margin-bottom: 16px;
+  line-height: 1.55;
+  margin-bottom: 18px;
 }
 
 .tch__cat-exp {
   align-self: flex-start;
   margin-top: auto;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #fff;
   background: var(--c-primary-2);
-  padding: 7px 14px;
+  padding: 8px 16px;
   border-radius: 999px;
 }
 
-/* --- Карточка преподавателя: вертикальная колонка --- */
+/* --- Карточка преподавателя: вертикальная колонка, покрупнее --- */
 .tch-card {
-  width: clamp(200px, 30vw, 232px);
+  width: clamp(250px, 34vw, 290px);
   background: var(--c-surface);
   border: 1.5px solid var(--c-border);
   border-radius: var(--radius);
@@ -88,33 +90,33 @@
 }
 
 .tch-card__body {
-  padding: 16px 18px 20px;
+  padding: 18px 20px 22px;
 }
 
-/* docx: подписи преподавателей — 13–14px, 400, #68639A */
 .tch-card__name {
-  font-size: var(--fs-body);
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--c-primary);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .tch-card__subject {
-  font-size: var(--fs-body);
-  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: var(--c-text);
 }
 
 .tch-card__exp {
-  font-size: var(--fs-body);
+  font-size: 0.85rem;
   font-weight: 400;
-  color: var(--c-text);
-  margin-top: 1px;
+  color: var(--c-text-soft);
+  margin-top: 2px;
 }
 
 @media (max-width: 760px) {
   .tch__cats {
     grid-template-columns: 1fr;
+    max-width: 420px;
   }
   .tch__cat {
     min-height: 0;

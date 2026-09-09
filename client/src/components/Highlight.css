@@ -5,19 +5,19 @@
     var(--hl-color, var(--c-yellow))
   );
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: 0 0.08em;
   background-size: 100% 0;
-  padding: 0 0.14em;
+  padding: 0.06em 0.16em;
   margin: 0 -0.04em;
-  border-radius: 0.4em 0.5em 0.4em 0.5em;
+  border-radius: 0.5em 0.62em 0.5em 0.6em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   transition: background-size 0.5s var(--ease) 0.15s;
 }
 
-/* по умолчанию (вне Reveal) — сразу залито, полоса тоньше текста */
+/* по умолчанию (вне Reveal) — сразу залито */
 .hl {
-  background-size: 100% 0.72em;
+  background-size: 100% calc(100% - 0.12em);
 }
 
 .hl__text {
@@ -30,5 +30,5 @@
 }
 
 .reveal--in .hl {
-  background-size: 100% 0.72em;
+  background-size: 100% calc(100% - 0.12em);
 }

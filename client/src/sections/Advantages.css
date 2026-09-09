@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(16px, 2.4vw, 30px);
-  background: var(--c-panel-2); /* серо-фиолетовая полоса */
+  background: var(--c-panel); /* та же серая плашка, что и хедер */
   border-radius: var(--radius-lg);
   padding: clamp(22px, 3vw, 34px) clamp(20px, 3vw, 40px);
 }
@@ -20,15 +20,15 @@
 
 .adv__icon {
   flex: 0 0 auto;
-  width: 80px;
-  height: 80px;
+  width: 88px;
+  height: 88px;
   object-fit: contain;
 }
 
 .adv__title {
   font-size: 1.3rem; /* крупнее и контрастнее */
   font-weight: 800;
-  color: var(--c-panel-ink);
+  color: var(--c-primary);
   margin-bottom: 3px;
   line-height: 1.1;
 }
@@ -36,7 +36,7 @@
 .adv__text p {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--c-panel-ink);
+  color: var(--c-primary-2);
   line-height: 1.35;
 }
 
