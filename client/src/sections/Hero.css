@@ -10,6 +10,11 @@
   gap: clamp(24px, 4vw, 52px);
 }
 
+.hero__copy {
+  position: relative;
+  z-index: 2; /* текст всегда поверх декоративных кругов */
+}
+
 .hero__title {
   font-size: var(--fs-h1);
   font-weight: 800;
@@ -48,7 +53,7 @@
 
 .hero__blob {
   position: absolute;
-  z-index: 1;
+  z-index: 0; /* задний слой */
   border-radius: 46% 54% 60% 40% / 52% 44% 56% 48%;
   filter: blur(2px);
 }
