@@ -129,9 +129,7 @@ export const reviews = Array.from({ length: 12 }, (_, i) => ({
 }))
 
 export const footer = {
-  // TODO: заменить плейсхолдеры на реальные данные
   address: 'г. Москва', // TODO
   year: new Date().getFullYear(),
   legalName: 'Помогариум', // TODO: ИП/самозанятость, ИНН
-  qrNote: 'QR-коды на мессенджеры — добавить', // TODO: залепить реальные QR
 }

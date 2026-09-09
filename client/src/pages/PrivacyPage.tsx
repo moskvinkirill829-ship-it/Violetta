@@ -12,9 +12,6 @@ export default function PrivacyPage() {
       <div className="container privacy__inner">
         <Link to="/" className="privacy__back">← На главную</Link>
         <h1>Политика конфиденциальности</h1>
-        <p className="privacy__note">
-          Черновик-шаблон. Перед публикацией согласуйте текст с юристом и укажите реквизиты оператора.
-        </p>
 
         <h2>1. Общие положения</h2>
         <p>

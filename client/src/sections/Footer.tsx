@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { QRCodeSVG } from 'qrcode.react'
 import { contacts, footer } from '../data/site'
 import MessengerIcon from '../components/MessengerIcon'
 import './Footer.css'
@@ -33,11 +34,27 @@ export default function Footer() {
         <div className="ftr__col ftr__col--qr">
           <h4 className="ftr__h">Мы в мессенджерах</h4>
           <div className="ftr__qr-row">
-            {/* TODO: заменить на реальные QR-коды */}
-            <span className="ftr__qr" title="QR — добавить">QR</span>
-            <span className="ftr__qr" title="QR — добавить">QR</span>
+            <a
+              href={contacts.telegram}
+              className="ftr__qr"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Telegram — QR-код и ссылка"
+            >
+              <QRCodeSVG value={contacts.telegram} size={76} bgColor="transparent" fgColor="#29217f" level="M" />
+              <span>Telegram</span>
+            </a>
+            <a
+              href={contacts.max}
+              className="ftr__qr"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="MAX — QR-код и ссылка"
+            >
+              <QRCodeSVG value={contacts.max} size={76} bgColor="transparent" fgColor="#29217f" level="M" />
+              <span>MAX</span>
+            </a>
           </div>
-          <span className="ftr__muted ftr__muted--sm">{footer.qrNote}</span>
         </div>
       </div>
     </footer>

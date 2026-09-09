@@ -77,20 +77,32 @@
 
 .ftr__qr-row {
   display: flex;
-  gap: 12px;
+  gap: 14px;
 }
 
 .ftr__qr {
-  width: 72px;
-  height: 72px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
   border-radius: 12px;
-  border: 1.5px dashed var(--c-border);
   background: #fff;
+  border: 1.5px solid var(--c-border);
   color: var(--c-text-soft);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+
+.ftr__qr:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+  color: var(--c-primary-2);
+}
+
+.ftr__qr svg {
+  display: block;
 }
 
 @media (max-width: 860px) {
