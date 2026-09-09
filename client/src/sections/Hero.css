@@ -46,9 +46,18 @@
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 3;
-  min-height: 460px;
+  min-height: 280px;
   border-radius: var(--radius-lg);
   object-fit: cover;
+}
+
+/* На десктопе ограничиваем высоту фото так, чтобы весь первый экран —
+   шапка + hero + серая полоса преимуществ — помещался в окно.
+   Отступы между блоками не меняются, масштабируется только фото. */
+@media (min-width: 901px) {
+  .hero__photo {
+    max-height: calc(100vh - 205px);
+  }
 }
 
 .hero__blob {
