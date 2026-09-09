@@ -113,9 +113,23 @@ h4 {
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  background: var(--c-primary-2);
   color: #fff;
   box-shadow: var(--shadow-btn);
+}
+
+.btn--primary:hover {
+  background: var(--c-primary);
+}
+
+.btn--yellow {
+  background: var(--c-yellow);
+  color: var(--c-primary);
+  box-shadow: 0 14px 26px -12px rgba(247, 197, 49, 0.75);
+}
+
+.btn--yellow:hover {
+  background: var(--c-yellow-deep);
 }
 
 .btn--ghost {
@@ -123,6 +137,11 @@ h4 {
   color: var(--c-primary-2);
   border: 1.5px solid var(--c-border);
   box-shadow: var(--shadow-soft);
+}
+
+.btn--sm {
+  padding: 11px 20px;
+  font-size: 0.9rem;
 }
 
 .btn--lg {

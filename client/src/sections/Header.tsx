@@ -27,8 +27,11 @@ export default function Header() {
     <header className={`hdr ${scrolled ? 'hdr--scrolled' : ''}`}>
       <div className="container hdr__inner">
         <a href="#top" className="hdr__logo" onClick={close}>
-          <span className="hdr__logo-name">Помогариум</span>
-          <span className="hdr__logo-tag">{contacts.brandTagline}</span>
+          <img className="hdr__logo-img" src="/images/logo.png" alt="" width={72} height={48} />
+          <span className="hdr__logo-txt">
+            <span className="hdr__logo-name">Помогариум</span>
+            <span className="hdr__logo-tag">{contacts.brandTagline}</span>
+          </span>
         </a>
 
         <nav className={`hdr__nav ${open ? 'is-open' : ''}`} aria-label="Основная навигация">
@@ -66,7 +69,7 @@ export default function Header() {
             </div>
           </div>
 
-          <a href="#lead" className="btn btn--primary hdr__cta" onClick={close}>
+          <a href="#lead" className="btn btn--primary btn--sm hdr__cta" onClick={close}>
             Записаться на урок
           </a>
 

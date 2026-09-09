@@ -16,17 +16,6 @@
   font-weight: 800;
 }
 
-.how__title-accent {
-  display: inline-block;
-  background: var(--c-surface);
-  color: var(--c-primary);
-  padding: 0.02em 0.26em;
-  margin: 0 -0.04em;
-  border-radius: 999px;
-  transform: rotate(-2deg);
-  box-shadow: var(--shadow-soft);
-}
-
 .how__sub {
   margin-top: 14px;
   font-size: 1.1rem; /* docx: 17–18px */
@@ -71,17 +60,10 @@
 }
 
 .how__icon {
-  display: inline-grid;
-  place-items: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  background: var(--c-surface-lav);
-  margin-bottom: 16px;
-}
-
-.how__step:last-child .how__icon {
-  background: #fff;
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
+  margin-bottom: 14px;
 }
 
 .how__step-title {

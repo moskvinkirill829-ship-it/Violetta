@@ -1,44 +1,43 @@
 .adv {
-  padding-block: clamp(28px, 4vw, 44px);
+  padding-block: clamp(24px, 3.5vw, 40px);
 }
 
 .adv__grid {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2.4vw, 32px);
-  background: var(--c-surface-lav);
+  gap: clamp(16px, 2.4vw, 30px);
+  background: var(--c-panel-2); /* серо-фиолетовая полоса */
   border-radius: var(--radius-lg);
-  padding: clamp(22px, 3vw, 34px) clamp(20px, 3vw, 38px);
+  padding: clamp(22px, 3vw, 34px) clamp(20px, 3vw, 40px);
 }
 
 .adv__item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
 }
 
 .adv__icon {
   flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  background: var(--c-surface);
-  box-shadow: var(--shadow-soft);
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
 }
 
 .adv__title {
-  font-size: 1.0625rem;
-  font-weight: 700;
-  margin-bottom: 4px;
+  font-size: 1.3rem; /* крупнее и контрастнее */
+  font-weight: 800;
+  color: var(--c-panel-ink);
+  margin-bottom: 3px;
+  line-height: 1.1;
 }
 
 .adv__text p {
-  font-size: var(--fs-body);
-  color: var(--c-text);
-  line-height: 1.4;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--c-panel-ink);
+  line-height: 1.35;
 }
 
 @media (max-width: 860px) {

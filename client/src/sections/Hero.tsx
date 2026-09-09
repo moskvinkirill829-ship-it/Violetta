@@ -10,7 +10,7 @@ export default function Hero() {
             Все школьные предметы <Highlight>онлайн</Highlight>
           </h1>
           <p className="hero__lead">Подберём репетитора, который подойдёт именно вам</p>
-          <a href="#lead" className="btn btn--ghost btn--lg hero__cta">
+          <a href="#lead" className="btn btn--yellow btn--lg hero__cta">
             Попробовать бесплатно
           </a>
         </div>

@@ -62,18 +62,17 @@
 }
 
 .ftr__msgrs a {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  background: var(--c-primary-2);
-  color: #fff;
-  transition: transform 0.15s var(--ease);
+  color: var(--c-primary-2); /* иконки фиолетовые */
+  transition: transform 0.15s var(--ease), color 0.15s var(--ease);
 }
 
 .ftr__msgrs a:hover {
   transform: translateY(-2px);
+  color: var(--c-primary);
 }
 
 .ftr__qr-row {
