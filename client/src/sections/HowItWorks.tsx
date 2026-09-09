@@ -18,7 +18,7 @@ export default function HowItWorks() {
           {steps.map((s, i) => (
             <Reveal as="li" key={s.n} className="how__step" delay={i * 120}>
               <span className="how__num">{s.n}</span>
-              <img className="how__icon" src={`/icons/i-${s.icon}.png`} alt="" width={72} height={72} loading="lazy" />
+              <img className="how__icon" src={`/icons/g-${s.icon}.png`} alt="" width={76} height={76} loading="lazy" />
               <h3 className="how__step-title">{s.title}</h3>
               <p className="how__step-text">{s.text}</p>
               {i < steps.length - 1 && (
