@@ -4,16 +4,13 @@ build/
 *.log
 npm-debug.log*
 
-# env / secrets
+# env / секреты
 .env
 .env.local
-server/.env
-!server/.env
+.env.*.local
 
-# runtime data (заявки, подписчики бота)
-server/data/*.csv
-server/data/*.json
-!server/data/.gitkeep
+# vercel
+.vercel
 
 # editor / os
 .DS_Store

@@ -1,20 +1,18 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
+import { devLeadApi } from './dev-api-plugin.mjs'
 
-// Дев-сервер клиента проксирует /api на Node-бэкенд (server/, порт 3001).
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-      },
+// Прод: Vercel собирает client → client/dist (статика) + функцию api/lead.mjs.
+// Дев: форму /api/lead обслуживает плагин devLeadApi (см. dev-api-plugin.mjs).
+export default defineConfig(({ mode }) => {
+  // '..' — корень монорепо (cwd при запуске = client/); '' — читаем все ключи, не только VITE_*
+  const env = loadEnv(mode, '..', '')
+  return {
+    plugins: [react(), devLeadApi(env)],
+    server: { port: 5173 },
+    build: {
+      outDir: 'dist',
+      sourcemap: false,
     },
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: false,
-  },
+  }
 })

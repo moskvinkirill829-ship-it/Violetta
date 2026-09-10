@@ -1,137 +1,63 @@
-# Деплой «Помогариум»
+# Деплой на Vercel
 
-Приложение — один Node-процесс: Express отдаёт API `/api/*` и статику `client/dist`,
-плюс поднимает Telegram-бота (long-polling). База данных не требуется.
+Сайт = статика (Vite) + одна serverless-функция `/api/lead`. Всё в одном проекте Vercel.
 
-Рекомендация по хостингу для РФ-аудитории: **Timeweb Cloud / Selectel / REG.RU Cloud**
-(VPS, Ubuntu 22.04, 1 vCPU, 1 ГБ RAM хватит). Нужен только исходящий HTTPS к
-`api.telegram.org` (есть по умолчанию).
+## 1. Telegram-группа (сделать один раз)
 
-> ⚠️ Telegram-бот работает через long-polling — запускайте **ровно один** экземпляр
-> сервера. Два параллельных процесса с одним токеном → ошибка `409 Conflict`.
+1. Создай группу в Telegram, напр. **«Помогариум — заявки»**.
+2. Добавь в неё бота **@Violetta\_Zayavki\_bot** и всех, кому нужны заявки.
+3. Узнай id группы:
+   - напиши в группе `/id@Violetta_Zayavki_bot`;
+   - открой в браузере `https://api.telegram.org/bot<ТОКЕН>/getUpdates`;
+   - найди `"chat":{"id":-100XXXXXXXXXX}` — это `TELEGRAM_CHAT_ID`.
 
----
+Токен бота (`TELEGRAM_BOT_TOKEN`) — в `.env.example` / у @BotFather.
 
-## Вариант A. VPS + Nginx + systemd (рекомендуется)
+## 2. Импорт проекта
 
-### 1. Подготовка сервера
+1. [vercel.com/new](https://vercel.com/new) → **Import** этого репозитория (`moskvinkirill829-ship-it/Violetta`).
+2. **Framework Preset:** `Other` (настройки берутся из `vercel.json`).
+   - Build Command, Output Directory, Install Command трогать не нужно — они в `vercel.json`.
+3. **Root Directory:** оставить корень репозитория (`./`), не `client`.
+   Функция `api/` должна быть на одном уровне с проектом.
 
-```bash
-# Node 20 LTS
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install -y nodejs nginx
+## 3. Переменные окружения
 
-sudo useradd -r -m -d /opt/pomogarium -s /bin/bash pomogarium
-```
+Project → **Settings → Environment Variables**, добавить для **Production** и **Preview**:
 
-### 2. Код и сборка
+| Name | Value |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` | `8986860813:AAG…` (токен бота) |
+| `TELEGRAM_CHAT_ID` | `-100…` (id группы из шага 1) |
 
-```bash
-sudo -u pomogarium -i
-git clone <репозиторий> /opt/pomogarium/app   # или загрузить архивом
-cd /opt/pomogarium/app
-npm ci
-cp server/.env.example server/.env
-nano server/.env            # PORT=3001, NODE_ENV=production, CORS_ORIGIN=https://ВАШ_ДОМЕН,
-                            # TELEGRAM_BOT_TOKEN=... (обязательно), TELEGRAM_SUBSCRIBE_CODE=... (по желанию)
-npm run build
-exit
-```
+После добавления — **Deployments → … → Redeploy** (иначе переменные не подхватятся).
 
-### 3. systemd-юнит
+## 4. Деплой
 
-`/etc/systemd/system/pomogarium.service`:
+- Первый деплой — кнопкой **Deploy**.
+- Дальше: любой `git push` в `main` → автоматический продакшн-деплой,
+  пуши в другие ветки / PR → preview-деплой.
 
-```ini
-[Unit]
-Description=Pomogarium site
-After=network.target
+## 5. Проверка
 
-[Service]
-Type=simple
-User=pomogarium
-WorkingDirectory=/opt/pomogarium/app
-Environment=NODE_ENV=production
-ExecStart=/usr/bin/node server/dist/index.js
-Restart=on-failure
-RestartSec=3
+1. Открыть выданный домен `*.vercel.app`.
+2. Отправить тестовую заявку через форму.
+3. Сообщение должно прийти в Telegram-группу.
+4. Если не пришло — Vercel → Project → **Logs**, фильтр по `/api/lead`:
+   - `Telegram не настроен` → не заданы/не задеплоены переменные;
+   - `Telegram API: chat not found` → бот не в группе или неверный `TELEGRAM_CHAT_ID`;
+   - `Telegram API: 403` → бота кикнули из группы.
 
-[Install]
-WantedBy=multi-user.target
-```
+## Свой домен (опционально)
 
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable --now pomogarium
-sudo systemctl status pomogarium
-```
-
-### 4. Nginx reverse proxy
-
-`/etc/nginx/sites-available/pomogarium`:
-
-```nginx
-server {
-    listen 80;
-    server_name ВАШ_ДОМЕН www.ВАШ_ДОМЕН;
-
-    location / {
-        proxy_pass http://127.0.0.1:3001;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    location ~* \.(js|css|png|jpg|jpeg|svg|woff2?)$ {
-        proxy_pass http://127.0.0.1:3001;
-        expires 30d;
-        add_header Cache-Control "public, immutable";
-    }
-}
-```
-
-```bash
-sudo ln -s /etc/nginx/sites-available/pomogarium /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-
-# TLS
-sudo apt-get install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d ВАШ_ДОМЕН -d www.ВАШ_ДОМЕН
-```
-
-### 5. Обновление
-
-```bash
-sudo -u pomogarium -i
-cd /opt/pomogarium/app && git pull && npm ci && npm run build && exit
-sudo systemctl restart pomogarium
-```
+Project → **Settings → Domains** → добавить домен, прописать у регистратора
+DNS-записи, которые покажет Vercel. HTTPS Vercel выпустит сам.
 
 ---
 
-## Вариант B. Docker
+### Почему не VPS / Docker
 
-```bash
-cp server/.env.example server/.env   # заполнить
-docker compose up -d --build
-```
-
-Приложение на `http://localhost:3001`. Nginx/TLS — сверху, как в варианте A,
-либо добавить Caddy/Traefik.
-
-Файлы: [`Dockerfile`](Dockerfile), [`docker-compose.yml`](docker-compose.yml).
-`server/data/` (CSV-заявки + `subscribers.json` со списком подписчиков бота)
-смонтирована томом, чтобы не терялась при пересборке.
-
----
-
-## Заметки
-
-- `client/dist` собирается в образе/на сервере — коммитить не нужно.
-- `server/data/leads.csv` — бэкап заявок, забирайте периодически (`scp`, том Docker).
-- `server/data/subscribers.json` — список получателей заявок в Telegram; при переезде
-  сервера скопируйте его, иначе подписчикам придётся снова нажать `/start`.
-- После деплоя откройте бота и нажмите `/start` — иначе заявки будут только в CSV.
-- Меняли контент в `client/src/data/site.ts` → нужна пересборка клиента (`npm run build`).
-- Форма шлёт `POST /api/lead`; проверить живость API: `GET /api/health` → `{"ok":true}`.
+Раньше проект деплоился на VPS с Express и Telegram-ботом на long-polling.
+Для Vercel это переписано: serverless не держит постоянный процесс и не пишет
+файлы, поэтому бот работает «в одну сторону» — только шлёт заявки в группу,
+без подписчиков и без вебхука. Это проще и надёжнее для лендинга.
