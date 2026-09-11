@@ -41,7 +41,11 @@ export default function LeadForm() {
   async function onSubmit(ev: FormEvent) {
     ev.preventDefault()
     if (status === 'sending') return
-    if (honeypot.current?.value) return // бот
+    // honeypot не блокирует отправку на клиенте: если браузер сам
+    // подставил туда значение автозаполнением (частый случай с полем
+    // "company" в Chrome), решение — за сервером, чтобы не терять
+    // настоящую заявку молча. Сервер тихо примет её как «ок» и просто
+    // не разошлёт, если это правда бот.
     if (!validate()) return
 
     setStatus('sending')
@@ -92,7 +96,7 @@ export default function LeadForm() {
               </button>
             </div>
           ) : (
-            <form className="lead__form" onSubmit={onSubmit} noValidate>
+            <form className="lead__form" onSubmit={onSubmit} noValidate autoComplete="off">
               <div className="lead__row lead__row--phone">
                 <label className="lead__field lead__field--code">
                   <span className="lead__label">Код</span>
@@ -145,11 +149,15 @@ export default function LeadForm() {
                 {errors.contact && <span className="lead__err">{errors.contact}</span>}
               </label>
 
-              {/* honeypot — скрыт от людей, ловит ботов */}
+              {/* honeypot — скрыт от людей, ловит ботов.
+                  Имя поля намеренно не "company"/"email"/"website" и т.п. —
+                  такие имена Chrome часто подставляет сам из автозаполнения,
+                  из-за чего реальная заявка выглядела бы как спам. */}
               <input
                 ref={honeypot}
                 type="text"
-                name="company"
+                name="hp_extra_field"
+                id="hp_extra_field"
                 tabIndex={-1}
                 autoComplete="off"
                 className="lead__hp"
