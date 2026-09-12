@@ -16,8 +16,6 @@ export default function Footer() {
         <div className="ftr__col">
           <h4 className="ftr__h">Контакты</h4>
           <a href={contacts.phoneHref} className="ftr__link">{contacts.phone}</a>
-          <a href={`mailto:${contacts.email}`} className="ftr__link">{contacts.email}</a>
-          <span className="ftr__muted">{footer.address}</span>
           <div className="ftr__msgrs">
             <a href={contacts.telegram} aria-label="Telegram" target="_blank" rel="noreferrer"><MessengerIcon name="telegram" size={18} /></a>
             <a href={contacts.whatsapp} aria-label="WhatsApp" target="_blank" rel="noreferrer"><MessengerIcon name="whatsapp" size={18} /></a>

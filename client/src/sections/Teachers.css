@@ -31,6 +31,8 @@
 .tch__cat {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   min-height: 360px;
   background: var(--c-surface);
   border: 1.5px solid var(--c-border);
@@ -53,7 +55,7 @@
 }
 
 .tch__cat-exp {
-  align-self: flex-start;
+  align-self: center;
   margin-top: auto;
   font-size: 0.9rem;
   font-weight: 700;
