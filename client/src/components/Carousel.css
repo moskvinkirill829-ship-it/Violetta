@@ -11,12 +11,22 @@
 
 .carousel__track {
   display: flex;
-  gap: var(--slide-gap, clamp(16px, 2.4vw, 28px));
   align-items: stretch;
+  margin-left: calc(-1 * var(--slide-gap, clamp(16px, 2.4vw, 28px)));
 }
 
-.carousel__track > * {
+/* прозрачная обёртка каждого слайда (см. Carousel.tsx) — отступ живёт
+   тут, а не на самой карточке, иначе он красится её фоном */
+.carousel__slide {
   flex: 0 0 auto;
+  min-width: 0;
+  padding-left: var(--slide-gap, clamp(16px, 2.4vw, 28px));
+}
+
+/* карточка внутри обёртки по-прежнему тянется на всю высоту ряда,
+   как раньше, когда сама была flex-элементом */
+.carousel__slide > * {
+  height: 100%;
 }
 
 /* --- Боковые стрелки --- */

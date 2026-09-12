@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react'
+import { Children, useCallback, useEffect, useState, type ReactNode } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import type { EmblaPluginType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
@@ -69,7 +69,16 @@ export default function Carousel({ children, autoplay = 0, ariaLabel, className 
       </button>
 
       <div className="carousel__viewport" ref={emblaRef}>
-        <div className="carousel__track">{children}</div>
+        <div className="carousel__track">
+          {/* отступ — padding на обёртке слайда, а не gap на треке: у embla
+              в режиме loop крайние слайды переставляются транформом, и
+              flex-gap на шве зацикливания иногда «съедается». Обёртка
+              нужна отдельным элементом, чтобы padding не красился фоном
+              самой карточки. */}
+          {Children.map(children, (child) => (
+            <div className="carousel__slide">{child}</div>
+          ))}
+        </div>
       </div>
 
       <button
