@@ -103,48 +103,55 @@ export type Teacher = {
   subject: string
   experience: string
   photo: string | null
+  /** Личная цитата под именем. \n — перенос строки (для двуязычной, как у Алины). */
+  quote: string
 }
 
 export const teachers: Teacher[] = [
   {
     name: 'Алина',
-    subject: 'английский язык',
+    subject: 'репетитор по английскому',
     experience: 'преподаёт 2 года',
     photo: '/images/teacher-alina.jpg',
+    quote: '‘English today. Opportunities tomorrow.’\nАнглийский сегодня — возможности завтра.',
   },
   {
     name: 'Анастасия',
     subject: 'русский язык и литература',
     experience: 'преподаёт 4 года',
     photo: '/images/teacher-anastasia.jpg',
-  },
-  // Фото есть, предмет и стаж — TODO: заказчик должен прислать текст.
-  {
-    name: 'Анна',
-    subject: '',
-    experience: '',
-    photo: '/images/teacher-anna.jpg',
-  },
-  {
-    name: 'Валерия',
-    subject: '',
-    experience: '',
-    photo: '/images/teacher-valeria.jpg',
+    quote: '«Читаем между строк, пишем без ошибок, говорим уверенно.»',
   },
   {
     name: 'Вячеслав',
-    subject: '',
-    experience: '',
+    subject: 'информатика и математика',
+    experience: 'преподаёт 12 лет',
     photo: '/images/teacher-vyacheslav.jpg',
+    quote: '«Любая сложная задача становится понятнее, если найти правильный алгоритм.»',
+  },
+  {
+    name: 'Валерия',
+    subject: 'математика и физика',
+    experience: 'преподаёт 3 года',
+    photo: '/images/teacher-valeria.jpg',
+    quote: '«Сложное становится понятным, когда находишь правильный путь.»',
   },
   {
     name: 'Роман',
-    subject: '',
-    experience: '',
+    subject: 'русский язык и литература',
+    experience: 'преподаёт 5 лет',
     photo: '/images/teacher-roman.jpg',
+    quote: '«Русский язык и литература без скуки: любовь к предмету и результат с первого урока.»',
+  },
+  {
+    name: 'Анна',
+    subject: 'биология и химия',
+    experience: 'преподаёт 18 лет',
+    photo: '/images/teacher-anna.jpg',
+    quote: '«Химия объясняет, из чего состоит мир. Биология — как он живёт.»',
   },
   // TODO: добавить остальных преподавателей — просто дописать объекты сюда:
-  // { name: 'Имя', subject: 'предмет', experience: 'преподаёт N лет', photo: '/images/teacher-xxx.jpg' },
+  // { name: 'Имя', subject: 'предмет', experience: 'преподаёт N лет', photo: '/images/teacher-xxx.jpg', quote: '«...»' },
 ]
 
 // 12 скринов отзывов из Telegram (client/public/reviews/1..12.jpg)

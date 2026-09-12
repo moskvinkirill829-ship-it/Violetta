@@ -43,8 +43,20 @@ export default function Teachers() {
                   )}
                 </div>
                 <div className="tch-card__body">
-                  <h4 className="tch-card__name">{t.name}</h4>
-                  <p className="tch-card__subject">{t.subject}</p>
+                  <h4 className="tch-card__name">
+                    {t.name}
+                    {t.subject && <>, <span className="tch-card__subject">{t.subject}</span></>}
+                  </h4>
+                  {t.quote && (
+                    <p className="tch-card__quote">
+                      {t.quote.split('\n').map((line, i, arr) => (
+                        <span key={i}>
+                          {line}
+                          {i < arr.length - 1 && <br />}
+                        </span>
+                      ))}
+                    </p>
+                  )}
                   <p className="tch-card__exp">{t.experience}</p>
                 </div>
               </article>

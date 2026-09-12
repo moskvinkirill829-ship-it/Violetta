@@ -22,6 +22,11 @@
   margin: 0 auto clamp(40px, 5vw, 64px);
 }
 
+/* побольше воздуха между карточками преподов в карусели */
+.tch__carousel .carousel__track {
+  gap: clamp(22px, 3.2vw, 40px);
+}
+
 /* карточки категорий — в том же вертикальном формате, что и карточки преподов */
 .tch__cat {
   display: flex;
@@ -58,20 +63,23 @@
   border-radius: 999px;
 }
 
-/* --- Карточка преподавателя: вертикальная колонка, покрупнее --- */
+/* --- Карточка преподавателя: серая рамка с острыми углами,
+   внутри — скруглённое фото. Разные по композиции фото так
+   выглядят одним стилем. --- */
 .tch-card {
   width: clamp(250px, 34vw, 290px);
-  background: var(--c-surface);
-  border: 1.5px solid var(--c-border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
+  background: var(--c-panel);
+  border-radius: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .tch-card__photo {
   aspect-ratio: 3 / 4;
+  margin: 14px 14px 0;
+  border-radius: var(--radius);
   background: var(--c-surface-lav);
   display: grid;
   place-items: center;
@@ -91,27 +99,34 @@
 }
 
 .tch-card__body {
-  padding: 18px 20px 22px;
+  padding: 14px 18px 20px;
 }
 
 .tch-card__name {
   font-size: 1.05rem;
   font-weight: 800;
   color: var(--c-primary);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .tch-card__subject {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--c-text);
 }
 
-.tch-card__exp {
+.tch-card__quote {
+  font-style: italic;
   font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--c-text-soft);
-  margin-top: 2px;
+  line-height: 1.4;
+  color: var(--c-primary-2);
+  margin-bottom: 8px;
+}
+
+.tch-card__exp {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--c-text);
 }
 
 @media (max-width: 760px) {
