@@ -157,6 +157,13 @@ export const teachers: Teacher[] = [
     photo: '/images/teacher-varvara.jpg',
     quote: '«Моя цель как педагога — убрать страх ошибок и сломать языковой барьер с первого занятия.»',
   },
+  {
+    name: 'Кристина',
+    subject: 'история и обществознание',
+    experience: 'преподаёт 4 года',
+    photo: '/images/teacher-kristina.jpg',
+    quote: '«История помогает понять прошлое. Обществознание — разобраться в настоящем.»',
+  },
   // TODO: добавить остальных преподавателей — просто дописать объекты сюда:
   // { name: 'Имя', subject: 'предмет', experience: 'преподаёт N лет', photo: '/images/teacher-xxx.jpg', quote: '«...»' },
 ]
