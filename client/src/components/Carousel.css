@@ -10,13 +10,19 @@
 }
 
 .carousel__track {
+  /* отступ между слайдами — через padding, а не gap: у embla в режиме
+     loop клонируются крайние слайды, и flex-gap на шве зацикливания
+     иногда «схлопывается». padding-left держит одинаковый отступ
+     всегда, включая шов между последним и первым слайдом. */
+  --slide-gap: clamp(16px, 2.4vw, 28px);
   display: flex;
-  gap: clamp(16px, 2.4vw, 28px);
   align-items: stretch;
+  margin-left: calc(-1 * var(--slide-gap));
 }
 
 .carousel__track > * {
   flex: 0 0 auto;
+  padding-left: var(--slide-gap);
 }
 
 /* --- Боковые стрелки --- */
