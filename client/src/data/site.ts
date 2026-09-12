@@ -112,7 +112,7 @@ export const teachers: Teacher[] = [
     name: 'Алина',
     subject: 'английский язык',
     experience: 'преподаёт 2 года',
-    photo: '/images/teacher-alina.jpg',
+    photo: '/images/teacher-alina-v2.jpg', // v2 — имя изменено, чтобы сбросить кэш браузера после обрезки фото
     quote: '‘English today. Opportunities tomorrow.’\nАнглийский сегодня — возможности завтра.',
   },
   {
@@ -149,6 +149,13 @@ export const teachers: Teacher[] = [
     experience: 'преподаёт 18 лет',
     photo: '/images/teacher-anna.jpg',
     quote: '«Химия объясняет, из чего состоит мир. Биология — как он живёт.»',
+  },
+  {
+    name: 'Варвара',
+    subject: 'английский и немецкий',
+    experience: 'преподаёт 7 лет',
+    photo: '/images/teacher-varvara.jpg',
+    quote: '«Моя цель как педагога — убрать страх ошибок и сломать языковой барьер с первого занятия.»',
   },
   // TODO: добавить остальных преподавателей — просто дописать объекты сюда:
   // { name: 'Имя', subject: 'предмет', experience: 'преподаёт N лет', photo: '/images/teacher-xxx.jpg', quote: '«...»' },
