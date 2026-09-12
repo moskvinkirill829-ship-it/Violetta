@@ -110,7 +110,7 @@ export type Teacher = {
 export const teachers: Teacher[] = [
   {
     name: 'Алина',
-    subject: 'репетитор по английскому',
+    subject: 'английский язык',
     experience: 'преподаёт 2 года',
     photo: '/images/teacher-alina.jpg',
     quote: '‘English today. Opportunities tomorrow.’\nАнглийский сегодня — возможности завтра.',
