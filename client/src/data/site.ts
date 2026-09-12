@@ -116,7 +116,32 @@ export const teachers: Teacher[] = [
     name: 'Анастасия',
     subject: 'русский язык и литература',
     experience: 'преподаёт 4 года',
-    photo: null, // TODO: положить фото в client/public/images/teacher-anastasia.jpg и указать путь
+    photo: '/images/teacher-anastasia.jpg',
+  },
+  // Фото есть, предмет и стаж — TODO: заказчик должен прислать текст.
+  {
+    name: 'Анна',
+    subject: '',
+    experience: '',
+    photo: '/images/teacher-anna.jpg',
+  },
+  {
+    name: 'Валерия',
+    subject: '',
+    experience: '',
+    photo: '/images/teacher-valeria.jpg',
+  },
+  {
+    name: 'Вячеслав',
+    subject: '',
+    experience: '',
+    photo: '/images/teacher-vyacheslav.jpg',
+  },
+  {
+    name: 'Роман',
+    subject: '',
+    experience: '',
+    photo: '/images/teacher-roman.jpg',
   },
   // TODO: добавить остальных преподавателей — просто дописать объекты сюда:
   // { name: 'Имя', subject: 'предмет', experience: 'преподаёт N лет', photo: '/images/teacher-xxx.jpg' },
